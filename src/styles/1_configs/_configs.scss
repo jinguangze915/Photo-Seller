@@ -1,0 +1,30 @@
+//@import 'functions';
+@import '../variables';
+//Use for include css config files
+ 
+@import 'functions';
+
+//Fonts
+/*@include add-font('/assets/fonts/Poppins-Thin', 'Poppins', normal, 100);
+@include add-font('/assets/fonts/Poppins-ExtraLight', 'Poppins', normal, 200);
+@include add-font('/assets/fonts/Poppins-Light', 'Poppins', normal, 300);
+@include add-font('/assets/fonts/Poppins-Regular', 'Poppins', normal, 400);
+@include add-font('/assets/fonts/Poppins-Medium', 'Poppins', normal, 500);
+@include add-font('/assets/fonts/Poppins-SemiBold', 'Poppins', normal, 600);
+@include add-font('/assets/fonts/Poppins-Bold', 'Poppins', normal, 700);
+@include add-font('/assets/fonts/Poppins-ExtraBold', 'Poppins', normal, 800);
+@include add-font('/assets/fonts/Poppins-Black', 'Poppins', normal, 900);*/
+
+@include add-font('/assets/fonts/Amaticscregular', 'Amatic SC', normal, 400);
+@include add-font('/assets/fonts/Amaticscbold', 'Amatic SC', normal, 600);
+
+
+@include add-font('/assets/fonts/notosansitalic', 'Noto Sans', normal, 300);
+@include add-font('/assets/fonts/notosans', 'Noto Sans', normal, 400);
+@include add-font('/assets/fonts/notosansbolditalic', 'Noto Sans', normal, 500);
+@include add-font('/assets/fonts/notosansbold', 'Noto Sans', normal, 600);
+
+
+//variable fonts
+$base-font: 'Noto Sans', Arial, Geneva, sans-serif;
+$ttl-font: 'Amatic SC', Arial, Geneva, sans-serif;

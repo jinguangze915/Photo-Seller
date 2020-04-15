@@ -1,0 +1,317 @@
+@import "../styles/variables";
+@import "../styles/1_configs/configs";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import '../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../node_modules/bootstrap/scss/_grid.scss';
+.cart{
+  &-t{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+  &-total{
+    color: $c-ttl;
+  }
+  &-b{
+    display: flex;
+    justify-content: flex-end;
+  }
+  &-card{
+    border: $border;
+    padding: 12px 10px 10px;
+    margin-bottom: 20px;
+    position: relative;
+    &-toggle-btn{
+      position: absolute;
+      right: 30px;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      text-decoration: none;
+      border: none;
+      border-left: $border;
+      border-bottom: $border;
+      background: none;
+      &:before,
+      &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 10px;
+        height: 2px;
+        background: $c-txt;
+        transition: transform .2s;
+      }
+
+      &.collapse{
+        &:before{
+          transform: rotate(90deg);
+          transform-origin: 50% 50%;
+        }
+      }
+    }
+    &-delete-btn{
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      text-decoration: none;
+      border: none;
+      border-left: $border;
+      border-bottom: $border;
+      background: none;
+      &:before,
+      &:after{
+        content: ' ';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        height: 16px;
+        width: 2px;
+        background-color: $c-txt;
+      }
+      &:before{
+        transform: rotate(45deg);
+      }
+      &:after{
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  &-cnt{
+    margin-top: 20px;
+  }
+  &-product{
+    &-ttl{
+      margin-bottom: 0;
+      margin-right: 50px;
+      align-items: center;
+      line-height: 1.2;
+    }
+    &-price{
+      text-align: right;
+    }
+    &-name{
+      //width: 33.3%;
+      //flex-shrink: 0;
+    }
+    &-qty{
+      //margin: 0 15px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      input{
+        padding: 4px 5px;
+        text-align: center;
+        max-width: 100px;
+        margin-left: 10px;
+      }
+    }
+  }
+  &-message{
+    border: $border;
+    padding: 15px;
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+    border-color: $c-primary;
+    color: $c-primary;
+    font-family: $ttl-font;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 4px;
+    background-color: $c-inverse;
+  }
+}
+
+.collapse-cnt{
+  &.collapse{
+    display: none;
+  }
+
+}
+.hidden { display: none !important;}
+
+.cropper-bg{
+  background: none;
+}
+.modal-crop{
+  text-align: center;
+  &-img{
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  &-btn{
+    margin-top: 20px;
+  }
+}
+:host ::ng-deep {
+  .nsm-dialog{
+    max-width: 550px;
+  }
+  .nsm-content {
+    background: none !important;
+    padding: 0;
+    box-shadow: none;
+  }
+  .nsm-dialog-btn-close{
+    img{
+      display: none;
+    }
+    top: 0;
+    right: -1.75rem;
+    position: absolute;
+  }
+  .overlay.nsm-overlay-open {
+    background-color: rgba($dark, 0.88);
+  }
+  .cropper-view-box {
+    outline: $c-inverse solid 1px;
+  }
+  .cropper-dashed{
+    opacity: .9;
+    &.dashed-h{
+      border-bottom-width: 2px;
+      border-top-width: 2px;
+    }
+    &.dashed-v {
+      border-left-width: 2px;
+      border-right-width: 2px;
+    }
+  }
+}
+.order-product-cnt{
+  &.__disabled{
+    opacity: .4;
+    pointer-events: none;
+  }
+}
+.order-product-wrap{
+  &.__add-loader{
+    position: relative;
+    &:after{
+      content: '';
+      display: block;
+      position: absolute;
+      background-image: url('/../img/loading.gif');
+      width: 70px;
+      height: 70px;
+      background-size: cover;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      z-index: 2
+    }
+  }
+}
+.empty{
+  &-message{
+    max-width: 280px;
+    margin: 0 auto;
+    padding-right: 25px;
+    text-align: center;
+    &-wrap{
+      padding: 30px 0;
+    }
+    &-txt{
+      font-size: 36px;
+      font-family: $ttl-font;
+      font-weight: 600;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: $c-ttl;
+    }
+    .btn-primary{
+      background: $c-orange;
+    }
+  }
+}
+@media screen and (max-width: 900px){
+  .cart{
+    &-b{
+      padding: 10px 0 0;
+    }
+  }
+}
+@media screen and (max-width: 680px){
+  .cart{
+    &-t{
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+    &-total{
+      width: 100%;
+      text-align: right;
+    }
+    &-product{
+      &-ttl{
+        font-size: 16px;
+      }
+      &-name {
+        @include make-col(12);
+        margin-bottom: 5px;
+      }
+      &-qty{
+        text-align: left;
+        @include make-col(6);
+      }
+      &-price{
+        @include make-col(6);
+      }
+    }
+  }
+  :host ::ng-deep {
+    .nsm-dialog-btn-close {
+      top: -20px;
+      right: 0;
+    }
+  }
+  .empty {
+    &-message {
+      padding-right: 0;
+    }
+  }
+  
+}
+
+.order-price-ttl.__mobile {
+  position: absolute;
+  top: 15px;
+  right: 0px;
+}
+.order-price-tbl-row-i.u-Flex-grow-4.visible-md {
+  position: relative;
+}
+.order-price-subttl.__L.brown {
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 680px) {
+  .order-price-tbl-row-i.u-Flex-grow-2 {
+    width: 100%;
+  }
+
+  .mg-center {
+    margin-left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+.btn-wrap-inline {
+  margin-top: 20px;
+}
+
+

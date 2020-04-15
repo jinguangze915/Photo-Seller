@@ -1,0 +1,448 @@
+@import "../styles/variables";
+@import "../styles/1_configs/configs";
+@import "../styles/5_blocks/grid";
+
+.packages{
+  margin-bottom: 30px;
+  &-cnt{
+    display: flex;
+    flex-direction: column;
+    &.__without-packages{
+      .packages-i.__packages{
+        order: -1;
+      }
+    }
+    &-ttl{
+      &.__small{
+        display: inline-block;
+      }
+    }
+    &-note{
+      display: inline-block;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+  }
+  &-i{
+    background: $c-bg;
+    &.__packages{
+      background: none;
+      margin: 35px 0 20px;
+    }
+    &:not(.__packages){
+      padding: 20px 0 50px;
+    }
+  }
+  &-row{
+    position: relative;
+    &.__disable{
+      &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba($c-inverse, 0.2);
+      }
+    }
+  }
+  &-col{
+    margin-bottom: 45px;
+    &-cnt{
+      position: relative;
+    }
+    &-modal{
+      @include make-col(12);
+      .packages{
+        &-card{
+          align-items: flex-start;
+          padding: 20px;
+          &-img{
+            width: 180px;
+          }
+          &-t{
+            height: auto;
+            overflow: visible;
+          }
+        }
+      }
+      .packages-small-card{
+        padding: 20px;
+      }
+    }
+    &.prod-col-S{
+      display: flex;
+      .packages-col-cnt{
+        width: 100%;
+        display: flex;
+      }
+    }
+  }
+  &-card{
+    display: flex;
+    align-items: center;
+    border: 2px solid #444242;
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    overflow: hidden;
+    &-img{
+      background-size: cover;
+      background-position: center center;
+      width: 200px;
+      height: 250px;
+      flex-shrink: 0;
+    }
+    &-cnt{
+      margin-left: 5%;
+      flex-grow: 1;
+    }
+    &-ttl{
+      font-size: 36px;
+      font-weight: 600;
+      font-family: $ttl-font;
+      line-height: 1.1;
+      margin-bottom: 15px;
+      padding-right: 115px;
+    }
+    &-txt{
+      line-height: 1.4;
+      font-size: 15px;
+      margin-right: 10px;
+    }
+    &-t{
+      height: 185px;
+      overflow: hidden;
+    }
+    &-m{
+      display: flex;
+      justify-content: space-between;
+    }
+    &-price{
+      position: absolute;
+      top: -75px;
+      right: -30px;
+      font-size: 28px;
+      font-weight: 400;
+      width: 175px;
+      height: 150px;
+      background: $c-bg;
+      border-radius: 50%;
+    }
+    &-total{
+      position: absolute;
+      bottom: 33px;
+      right: 5px;
+      left: 0;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 30px;
+      color: $c-txt;
+    }
+    &-more{
+      display: block;
+      text-decoration: underline;
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 12px;
+      margin-top: 5px;
+      text-align: right;
+      color: $c-txt;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+    &-b{
+      position: absolute;
+      bottom: -22px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      display: block;
+      max-width: 125px;
+      width: 100%;
+    }
+    &-lnk{
+      max-width: 250px;
+      width: 100%;
+      margin-right: 5%;
+    }
+    &-btn{
+      width: 100%;
+      border: none;
+    }
+  }
+  &-small{
+    &-card{
+      width: 100%;
+      border: 1px solid $c-border-inverse;
+      background: $c-inverse;
+      padding: 20px 20px 45px;
+      position: relative;
+      overflow: hidden;
+      .packages-card-price{
+        background: $c-border-inverse;
+      }
+      .packages-card-more{
+        text-align: left;
+        margin-top: 20px;
+      }
+    }
+    &-wrap-img{
+      width: 130px;
+      margin-right: 5px;
+      flex-shrink: 0;
+    }
+    &-cnt{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 110px;
+    }
+    &-l{
+      font-size: 17px;
+      text-align: center;
+      flex-grow: 2;
+      &.__text-left{
+        text-align: left;
+      }
+    }
+    &-price{
+      font-size: 22px;
+      font-weight: 400;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .nsm-content {
+    padding: 30px 0 15px;
+  }
+}
+@media screen and (max-width: 1250px){
+  .packages-small-wrap-img{
+    width: 100px;
+  }
+}
+@media screen and (max-width: 1200px){
+  .packages{
+    &-card{
+      &-cnt{
+      margin-left: 2%;
+      }
+      &-price{
+        width: 160px;
+        height: 145px;
+      }
+      &-ttl{
+        padding-right: 95px;
+      }
+      &-total{
+        font-size: 26px;
+      }
+    }
+    &-row{
+      margin: 0 -5px;
+    }
+    &-col{
+      padding: 0 5px;
+    }
+    &-small{
+      &-cnt{
+        padding-right: 90px;
+      }
+
+    }
+  }
+}
+@media screen and (max-width: 1024px){
+  .packages{
+    &-col:not(.__S){
+      @include make-col(12);
+      padding: 0 5px;
+      max-width: 700px;
+      width: 100%;
+      margin: 0 auto 50px;
+    }
+    & .prod-row {
+      &.__S{
+        justify-content: space-evenly;
+      }
+    }
+    & .prod-col-S{
+      @include make-col(6);
+
+    }
+    &-card{
+      &-price{
+        width: 170px;
+        height: 150px;
+      }
+      &-ttl{
+        padding-right: 120px;
+      }
+      &-total{
+        font-size: 30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 900px){
+  .packages{
+    &-cnt{
+      margin-top: 0;
+    }
+    &-i{
+      &:nth-of-type(2n){
+        margin: 20px 0 10px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) and (min-width: 581px), screen and (max-width: 480px){
+  .packages-small{
+    &-cnt{
+      display: block;
+      padding-right: 0;
+    }
+    &-l{
+      text-align: left;
+      margin-top: 10px;
+    }
+    &-wrap-img{
+      margin: 0;
+      width: 130px;
+    }
+  }
+}
+@media screen and (max-width: 680px){
+  .packages {
+
+    &-card {
+      flex-wrap: wrap;
+
+      &-ttl {
+        width: 100%;
+        margin-bottom: 35px;
+      }
+
+      &-img {
+        margin: 0 auto;
+      }
+
+      &-txt {
+        margin-right: 0;
+      }
+
+      &-cnt {
+        margin-top: 20px;
+        margin-bottom: 40px;
+      }
+
+      &-t {
+        height: 177px;
+      }
+    }
+
+    &-small {
+      &-card {
+        padding: 20px 20px 45px;
+      }
+    }
+
+    &-col {
+      &-modal {
+        padding: 0;
+        .packages-card,
+        .packages-small-card{
+          padding: 10px;
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          &-cnt {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+  .modal-b{
+    &.__packages{
+      margin-top: 40px;
+      padding: 0 15px;
+    }
+  }
+  .modal-cnt{
+    margin: 0;
+  }
+  :host ::ng-deep {
+    .nsm-content {
+      padding: 0 0 15px;
+      margin: 2em 0.75rem;
+    }
+  }
+}
+@media screen and (max-width: 580px){
+  .packages {
+    .prod-col-S {
+      @include make-col(12);
+    }
+  }
+}
+@media screen and (max-width: 480px){
+  .packages{
+    &-cnt-ttl{
+      text-align: center;
+    }
+    &-card{
+      padding: 10px;
+      &-cnt{
+        margin-left: 0;
+      }
+    }
+  }
+}
+@media screen and (max-width: 375px){
+  .packages{
+    &-card{
+      &-price{
+        width: 150px;
+        height: 145px;
+      }
+      &-ttl{
+        padding-right: 110px;
+      }
+      &-total{
+        font-size: 24px;
+      }
+    }
+  }
+}
+#wrap-togallery>div button {
+  margin-left: 10px;
+}
+@media screen and (max-width: 680px) {
+  #wrap-togallery > div {
+      height: 45px;
+      width: 295px;
+      transform: translateX(-50%);
+      margin-left: 50%;
+      margin-bottom: 3.5rem;
+  }
+  #wrap-togallery>div form{
+    width: 100%;
+  }
+  #wrap-togallery>div button {
+    margin-top: 2px;
+  }
+}
+
+@media screen and (min-width: 681px) {
+  #wrap-togallery>div {
+    height: 45px;
+    width: 300px;
+    transform: translateX(-50%);
+    margin-left: 50%;
+    margin-bottom: 3.5rem;
+  }
+}

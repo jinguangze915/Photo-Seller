@@ -1,0 +1,48 @@
+<div *ngIf="!galleryItems" class="loaderWrapper"><div class="loader"></div></div>
+
+<div class="category categories">
+  <div class="category-container">
+    <div class="category-cnt container">
+      <h1 class="category-cnt-ttl ttl red">{{subgallery.static?.name}}</h1>
+      <h1 class="category-cnt-subttl ttl brown">{{subgallery.static?.school}}</h1>
+      <div class="category-row">
+        <div class="category-col" [gallery]="galleryId" *ngFor="let item of galleryItems;
+                                let i = index" [lightbox]="i" (click)="addBtnCart(item?.image, $event)" >
+          <div class="category-card" [ngStyle]="{'background-image': 'url(' + item?.image + ')'}">
+            <div class="category-card-lnk"></div>
+              <div class="categories-b">
+                <a class="categories-b-ttl" [routerLink]="['/app/' + idSubGallery + '/packages']" (click)="getImg(item?.image, i, item?.width, item?.height, item?.id)">Choose</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="categories-b-img"></div>
+  </div>
+</div>
+
+<!-- Modal email -->
+<ngx-smart-modal #modalEmail identifier="modalEmail" class="modal-email">
+  <div class="order-modal-cnt">
+    <h1 class="ttl __M">Enter Your Email Address <br> To View The Gallery</h1>
+    <form [formGroup]="formEmail" (ngSubmit)="onSubmitEmail()" class="order-promo-form">
+      <div [ngClass]="{'has-error': formEmail.get('email').invalid && formEmail.get('email').touched }" class="order-wrap-inp">
+        <label for="email" class="order-lbl"></label>
+        <input type="email"
+               name="email"
+               id="email"
+               class="order-inp"
+               formControlName="email" placeholder="Enter a valid email address">
+        <div *ngIf="submittedEmail && ifEmailErrors.email.errors" class="invalid-feedback">
+          <div *ngIf="ifEmailErrors.email.errors.required">Email is required</div>
+        </div>
+      </div>
+
+      <div class="wrap-sub order-wrap-sub">
+        <button type="submit"
+                class="btn btn-success">ENTER</button>
+      </div>
+      <div class="form-status" *ngIf="error">{{error}}</div>
+    </form>
+  </div>
+</ngx-smart-modal>

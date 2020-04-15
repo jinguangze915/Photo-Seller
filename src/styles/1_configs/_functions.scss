@@ -1,0 +1,68 @@
+// Functions 
+
+
+/* Adding fonts
+ type fonts .eot, .woff, .ttf , .svg
+ variables:
+ $font-file - name files font
+ $font-name - default = $font-file
+ $font-style - style for fonts
+ $font-weight - font weight*/
+@mixin add-font($font-file, $font-name:$font-file, $font-style:normal, $font-weight:normal){
+	@font-face {
+    	font-family: $font-name;
+    	src: url($font-file +'.eot');
+    	src: url($font-file +'.eot?#iefix') format('embedded-opentype'), //IE fix
+    	url($font-file + '.svg') format('svg'), // .svg fix for Chrome and webkit.
+        url($font-file + '.woff') format('woff'),
+        url($font-file + '.ttf') format('truetype');
+    	font-style: $font-style;
+    	font-weight: $font-weight;
+	}
+}
+
+//Add background gradient from $start-color, to $finish-color
+
+@mixin bg-gradient($start-color, $finish-color) {
+	background: -moz-linear-gradient(center top, $start-color 0px, $finish-color 100%) 0 0 repeat;
+    background:-webkit-linear-gradient($start-color, $finish-color) 0 0 repeat;
+    background:-ms-linear-gradient($start-color, $finish-color) 0 0 repeat;
+    background:-o-linear-gradient($start-color, $finish-color) 0 0 repeat;
+    background:linear-gradient($start-color, $finish-color) 0 0 repeat;
+}
+
+//Set border radius
+@mixin border-radius($px) {
+	-webkit-border-radius: $px;
+    -moz-border-radius: $px;
+    border-radius: $px;
+}
+
+@mixin bg-img($img, $size: 'cover', $repeat: no-repeat){
+	background: url('../img/' + $img) $repeat;
+	@include background-size($size);
+}
+
+
+@function em($target, $context: $base-font-size) {
+	@if $target == 0 { @return 0 }
+	@return $target / $context + 0em;
+}
+
+@function per($value, $context: $base-width){
+	@if $value == 0 { @return 0}
+	@return $value / $context * 100%;
+}
+
+
+// Add dot at main menu
+@mixin add-dot($color, $content) {
+        content: $content;
+        font-family: "ExoBold";
+        color: $color;
+        font-size: 30px;
+        line-height: 0px;
+        top: 4px;
+        position: relative;
+        left: -6px;
+}

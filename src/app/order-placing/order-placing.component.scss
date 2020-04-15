@@ -1,0 +1,357 @@
+@import "../styles/variables";
+//Bootstarp grid
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import '../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../node_modules/bootstrap/scss/_grid.scss';
+
+@import "~@ng-select/ng-select/scss/default.theme";
+
+.order{
+  &-placing{
+    margin-top: 10px;
+    &-l{
+      position: absolute;
+      top: 0;
+      right: 30px;
+      padding: 10px 30px 30px;
+      max-width: 285px;
+      width: 100%;
+      background: $c-inverse;
+      border: 1px solid $c-border-inverse;
+      z-index: 1;
+    }
+    &-btn{
+      text-align: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    &-arrow{
+      display: inline-block;
+      vertical-align: middle;
+      background-image: url("/../img/order-arrow.png");
+      width: 48px;
+      height: 25px;
+    }
+    &-txt{
+      margin-bottom: 0;
+      padding-top: 20px;
+    }
+    &-blk{
+      padding-bottom: 30px;
+      &.bg-light-orange{
+        .order-inp{
+          border-color: $c-bg;
+        }
+      }
+    }
+    &-wrap{
+      position: relative;
+    }
+    .col{
+      @include make-col(6);
+      &.__S{
+        @include make-col(4);
+      }
+    }
+    &-b{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-desc{
+      font-size: 17px;
+      line-height: 1.5;
+      margin-top: 5px;
+    }
+    &-note{
+      font-size: 12px;
+      font-weight: 600;
+      color: $c-txt;
+    }
+  }
+  &-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: $c-txt;
+    &.__bold{
+      font-weight: 600;
+      padding-bottom: 5px;
+    }
+  }
+  &-col{
+    line-height: 1.3;
+    &:first-of-type{
+      margin-right: 5px;
+    }
+    &.__count{
+      font-size: 17px;
+      margin-left: 5px;
+    }
+  }
+  &-points{
+    font-weight: 400;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+  &-lbl{
+    font-weight: 400;
+    font-size: 16px;
+    text-align: left;
+    padding-bottom: 15px;
+    &-lnk{
+      font-weight: 400;
+      text-decoration: underline;
+      color: $c-btn;
+      cursor: pointer;
+    }
+  }
+  &-wrap-inp{
+    margin-top: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  &-inp{
+    border-color: $c-border-inverse;
+    font-size: 12px;
+    &::-webkit-input-placeholder {
+      text-transform: uppercase;
+    }
+    &::-moz-placeholder{
+      text-transform: uppercase;
+    }/* Firefox 19+ */
+    &:-moz-placeholder{
+      text-transform: uppercase;
+    }/* Firefox 18- */
+    &:-ms-input-placeholder{
+      text-transform: uppercase;
+    }
+  }
+  &-txt{
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  &-wrap-checkbox{
+    margin: 20px 0;
+    &:first-of-type{
+      margin-right: 30px;
+    }
+    input {
+      display: none;
+      &:checked + label > .checked-ic:before {
+        content: '';
+        background-image: url("/../img/check.png");
+        width: 24px;
+        height: 22px;
+        top: auto;
+        bottom: 1px;
+        left: 1px;
+      }
+    }
+    label {
+      cursor: pointer;
+      display: block;
+      padding-left: 35px;
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
+      position: relative;
+      text-align: left;
+      padding-top: 10px;
+    }
+    .checked-ic {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 25px;
+      height: 25px;
+      border: 3px solid $c-bg;
+      background: $c-inverse;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+    &.has-error{
+      .checked-ic {
+        border-color: $c-error;
+      }
+    }
+  }
+  &-wrap-sub{
+    max-width: 210px;
+    margin: 15px auto;
+    .btn{
+      width: 100%;
+      &.__lnk{
+        max-width: 190px;
+      }
+    }
+  }
+  &-modal{
+    &-cnt{
+      text-align: center;
+    }
+    &-desc{
+      font-size: 12px;
+      text-transform: uppercase;
+      color: $c-txt;
+    }
+  }
+  &-cupone-message{
+    position: absolute;
+    top: 60px;
+    right: 0;
+    left: 0;
+    font-size: 15px;
+    padding: 15px;
+    background: $c-bg;
+    border-radius: 4px;
+    border: 1px solid $c-success;
+    margin: 0 auto;
+    max-width: 220px;
+  }
+}
+
+.__p-r{
+  padding-right: 350px;
+}
+
+.modal-review-btn{
+  display: block;
+  max-width: 350px;
+  margin: 20px auto;
+}
+.nsm-dialog {
+  max-width: 550px!important;
+}
+
+:host ::ng-deep {
+  $ng-select-box-shadow : none;
+  $ng-select-highlight: $c-txt;
+  $ng-select-border-radius: 0;
+  $ng-select-marked:  $c-bg;
+  $ng-select-selected: $c-bg;
+  $ng-select-primary-text: $c-txt;
+  $ng-select-border: $c-border;
+  @import "~@ng-select/ng-select/scss/default.theme";
+  .ng-dropdown-panel.ng-select-bottom{
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius: 0px;
+  }
+  .ng-dropdown-panel.ng-select-bottom .ng-dropdown-panel-items .ng-option:last-child{
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius: 0px;
+  }
+  .ng-select.ng-select-single .ng-select-container {
+    height: 50px;
+  }
+  .ng-select .ng-select-container{
+    min-height: 40px;
+    border-color: $c-bg;
+    background: $c-inverse;
+    color: $c-txt;
+  }
+  .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input{
+    top: 0;
+    left: -5px;
+    padding-left: 0;
+  }
+  .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input input[disabled]{
+    cursor: not-allowed;
+  }
+  .ng-select .ng-arrow-wrapper .ng-arrow{
+    border-color: $c-txt transparent transparent;
+  }
+  .ng-select .ng-select-container .ng-value-container{
+    padding-left: 20px;
+  }
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup{
+    font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 900px){
+  .order{
+    &-placing{
+      &-l{
+        display: flex;
+        justify-content: space-between;
+        position: static;
+        max-width: 100%;
+        margin-bottom: 25px;
+      }
+      &-i{
+        max-width: 43%;
+        width: 100%;
+      }
+      &-txt{
+        padding-top: 0;
+        &.__M{
+          padding-top: 15px;
+        }
+      }
+    }
+  }
+  .__p-r{
+    padding-right: 15px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .order{
+    &-placing{
+      flex-wrap: wrap;
+      &-btn{
+        max-width: 150px;
+        margin: 0 auto;
+      }
+      &-l{
+        flex-wrap: wrap;
+        padding: 10px;
+      }
+      &-i{
+        max-width: 100%;
+      }
+      & .col{
+        @include make-col(12);
+        &.__S{
+          @include make-col(12);
+        }
+      }
+      &-b{
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+    }
+    &-cupone-message{
+      display: none;
+    }
+    &-wrap{
+      &-checkbox{
+        width: 100%;
+        margin: 10px 0;
+        &:first-of-type {
+          margin-right: 0;
+          margin-top: 20px;
+        }
+      }
+      &-sub{
+        max-width: 150px;
+      }
+    }
+  }
+  :host ::ng-deep {
+    .nsm-content {
+      margin: 2rem 0.75rem;
+    }
+  }
+}

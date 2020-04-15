@@ -1,0 +1,256 @@
+<div class="order">
+
+  <app-nav></app-nav>
+
+  <div class="order-product" *ngFor="let product of products; let index = index;">
+
+    <!-- ONE PACKAGE -->
+    <ng-container *ngIf = "product.type =='package'">
+      <div class="order-product-wrap" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__add-loader'">
+        <div class="order-product-cnt container" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__disabled'">
+
+          <div class="order-price-tbl">
+
+            <div class="order-price-tbl-row __header">
+
+              <div class="order-price-tbl-row-i u-Flex-grow-10 hidden-md" *ngIf="product.digital">
+                <div class="order-price-ttl brown">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+              </div>
+
+              <div class="order-price-tbl-row-i u-Flex-grow-6 hidden-md" *ngIf="!product.digital">
+                <div class="order-price-ttl brown">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+              </div>
+
+              <div class="order-price-tbl-row-i u-Flex-grow-4 visible-md">
+                <div class="order-price-ttl brown __desktop">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+                <div class="order-price-ttl text-right __mobile">
+                  <!-- <div class="order-price-arrow" *ngIf="!product.digital" (click)="toggleViewCard($event, index)"></div> -->
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+
+              <div class="order-price-tbl-row-i __center u-Flex-grow-1.5">
+                <div class="order-price-ttl brown __middle">Price</div>
+                <div class="order-price-subttl gray">$ {{product?.price}}</div>
+              </div>
+              <div class="order-price-tbl-row-i __center u-Flex-grow-2" *ngIf="!product.digital">
+                <div class="order-price-ttl brown __middle">Qty</div>
+                <div class="order-price-subttl __calculate gray">
+                  <div class="order-price-minus" [ngClass]="product.quantity <=1 ? '__disabled': ''" (click)="onCountChangeBtn('minus', product, index)">-</div>
+                  <input type="number" class="order-price-inp" min="1" value="{{product?.quantity}}" (input)="onCountChange($event, product, index)">
+                  <div class="order-price-plus" (click)="onCountChangeBtn('plus', product, index)">+</div>
+                </div>
+              </div>
+              <!-- <div class="order-price-tbl-row-i __center u-Flex-grow-1.5" *ngIf="!product.digital">
+                <div class="order-price-ttl brown __middle">Extended</div>
+                <div class="order-price-subttl red">$ {{product.extendedPrice ? product.extendedPrice : product.price * product.quantity}}</div>
+              </div> -->
+              <div class="order-price-tbl-row-i __relative u-Flex-grow-1 __desktop">
+                <div class="order-price-ttl text-right">
+                  <!-- <div class="order-price-arrow" (click)="toggleViewCard($event, index)" *ngIf="!product.digital"></div> -->
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-price-cnt collapse-cnt" [ngClass] = "product.digital ? '__digital' : ''">
+            <div class="product-row">
+
+              <div class="product-col"
+                   *ngFor="let productInPackage of product?.products; let i = index"
+                   [ngClass]="productInPackage.product_type == 'Digital' || productInPackage.product_type == 'Digital Full' || productInPackage.product_type == 'Digital Single' ? '__L' : ''">
+
+                <!--|| productInPackage.product_type == 'Digital Single'-->
+                <div *ngIf="productInPackage.product_type == 'Digital' || productInPackage.product_type == 'Digital Full'; else elseBlock">
+                  <div class="order-wrap">
+                    <div class="order-preview">
+                      <div class="order-price-tbl-row-i order-preview-ttl brown u-Flex-grow-3" style="text-align: center; display: block;">{{productInPackage?.name}}</div>
+                      <div class="order-price-tbl-row-i order-preview-cnt u-Flex-grow-9 mg-center">
+                        <div class="order-preview-img" *ngIf="productInPackage?.product_type == 'Digital Single'; else elseBlockProduct">
+                          <img src="{{productInPackage.image}}" alt="">
+                        </div>
+                        <ng-template #elseBlockProduct>
+                          <div class="order-preview-img" *ngFor="let gallery of product?.sub_gallery_data.data; let index = index">
+                            <img src="{{gallery.image}}" alt="">
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #elseBlock>
+                  <app-product-card [product]="productInPackage"
+                                    (changeImg) = "updateImg($event, product, index, i, product.limit_poses)"
+                                    (changeCropZone) = "showModalCrop($event, product, index, i)"
+                                    (changeSize)="updateSize($event, product, index, i)">
+                  </app-product-card>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="cart-message" *ngIf="product.showButton">
+              There is a pose limit for this package (max {{product?.limit_poses}} poses). Please select another pose or package
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- END ONE PACKAGE -->
+
+    <!--ONE PRINTABLE PRODUCT-->
+    <ng-container *ngIf = "product.product_type == 'Printable'">
+      <div class="order-product-wrap" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__add-loader'">
+        <div class="order-product-cnt container" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__disabled'">
+          <div class="order-price-tbl">
+            <div class="order-price-tbl-row __header">
+              <div class="order-price-tbl-row-i u-Flex-grow-6 hidden-md">
+                <div class="order-price-ttl brown">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+              </div>
+
+              <div class="order-price-tbl-row-i u-Flex-grow-4 visible-md">
+                <div class="order-price-ttl brown __desktop-md">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+                <div class="order-price-ttl text-right __mobile">
+                  <!-- <div class="order-price-arrow" (click)="toggleViewCard($event, index)"></div> -->
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+
+              <div class="order-price-tbl-row-i __center u-Flex-grow-1.5">
+                <div class="order-price-ttl brown __middle">Price</div>
+                <div class="order-price-subttl gray">$ {{product?.price}}</div>
+              </div>
+              <div class="order-price-tbl-row-i __center u-Flex-grow-2">
+                <div class="order-price-ttl brown __middle">Qty</div>
+                <div class="order-price-subttl __calculate gray">
+                  <div class="order-price-minus" [ngClass]="product.quantity <=1 ? '__disabled': ''" (click)="onCountChangeBtn('minus', product, index)">-</div>
+                  <input type="number" class="order-price-inp" min="1" value="{{product?.quantity}}" (input)="onCountChange($event, product, index)">
+                  <div class="order-price-plus" (click)="onCountChangeBtn('plus', product, index)">+</div>
+                </div>
+              </div>
+              <!-- <div class="order-price-tbl-row-i __center u-Flex-grow-1.5">
+                <div class="order-price-ttl brown __middle">Extended</div>
+                <div class="order-price-subttl red">$ {{product.extendedPrice ? product.extendedPrice : product.price * product.quantity }}</div>
+              </div> -->
+              <div class="order-price-tbl-row-i __relative u-Flex-grow-1 __desktop">
+                <div class="order-price-ttl text-right">
+                  <!-- <div class="order-price-arrow" (click)="toggleViewCard($event, index)"></div> -->
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-price-cnt collapse-cnt">
+            <div class="product-row">
+              <div class="product-col">
+
+                <app-product-card [product]="product"
+                                  (changeImg) = "updateImg($event, product, index)"
+                                  (changeCropZone) = "showModalCrop($event,product, index)"
+                                  (changeSize)="updateSize($event, product, index)">
+                </app-product-card>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- END ONE PRINTABLE PRODUCT -->
+
+    <!-- ONE OTHER PRODUCT -->
+    <ng-container *ngIf = "product.product_type == 'Retouch' || product.product_type == 'Digital' || product.product_type == 'Digital Full' ||  product.product_type == 'Digital Single'">
+      <div class="order-product-wrap" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__add-loader'">
+        <div class="order-product-cnt container" [ngClass] = "stateActiveProductsInCart[index] ? '' : '__disabled'">
+          <div class="order-price-tbl __digital">
+            <div class="order-price-tbl-row __header">
+              <div class="order-price-tbl-row-i u-Flex-grow-3 hidden-md">
+                <div class="order-price-ttl brown">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+              </div>
+
+              <div class="order-price-tbl-row-i u-Flex-grow-4 visible-md">
+                <div class="order-price-ttl brown __desktop-md">Product</div>
+                <div class="order-price-subttl __L brown">{{product?.name}}</div>
+                <div class="order-price-ttl text-right __mobile">
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+
+              <div class="order-price-tbl-row-i __product-type u-Flex-grow-7">
+                <div class="order-wrap">
+
+                  <div class="order-wrap-txt" *ngIf = "product.product_type == 'Retouch'">
+                    <label for="comment" class="order-wrap-lbl">Comment:</label>
+                    <textarea (input)="onRetouchChange($event, product, index)" name="comment" id="comment" rows="2" class="order-wrap-comment">{{product?.retouch}}</textarea>
+                  </div>
+
+                  <div *ngIf = "product.product_type != 'Retouch'" class="order-preview">
+                    <div class="order-preview-img" *ngFor="let gallery of subGallery.data; let index = index">
+                      <img src="{{gallery.image}}" alt="">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="order-price-tbl-row-i __center u-Flex-grow-1.5">
+                <div class="order-price-ttl brown __middle">Price</div>
+                <div class="order-price-subttl gray">$ {{product?.price}}</div>
+              </div>
+
+              <div class="order-price-tbl-row-i __relative u-Flex-grow-1 __desktop">
+                <div class="order-price-ttl text-right">
+                  <div class="order-price-delete" (click)="deleteFromCart($event, index)"></div>
+                </div>
+              </div>
+            </div>
+            <div class="order-price-cnt collapse-cnt">
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <!-- END ONE OTHER PRODUCT -->
+  </div>
+
+  <div class="empty-message-wrap bg-light-orange" *ngIf="!products.length">
+    <div class="container">
+      <div class="empty-message">
+        <div class="empty-message-txt">Your cart is empty</div>
+        <div class="empty-message-btn">
+          <a [routerLink]="['/app/'+ userId + '/packages']"  class="btn btn-primary">Add package/Add-on</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="btn-wrap-inline">
+      <a [routerLink]="['/app/'+ userId + '/gallery']" class="btn btn-gray"><i class="btn-gray-ic"></i> Back to gallery</a>
+      <!-- <a [routerLink]="['/app/'+ userId + '/packages']"  class="btn btn-primary hidden-inline-xs">Add one more package/<br class="visible-md">add-on</a> -->
+      <a [routerLink]="['/app/'+ userId + '/packages']"
+         class="btn btn-primary">
+        <i class="btn-primary-ic visible-inline-md"></i>Continue<i class="btn-primary-ic hidden-inline-md"></i>
+      </a>
+    </div>
+    <!--<div class="btn-wrap-blk visible-xs">
+      <a [routerLink]="['/app/'+ userId + '/packages']"  class="btn btn-primary">Add one more package/<br class="visible-md">add-on</a>
+    </div>-->
+  </div>
+</div>
+
+<!--Modal with crop photo-->
+<ngx-smart-modal #modalCropImg identifier="modalCropImg"  class="modal-crop" (onClose)="resetDataModalCrop()">
+  <div class="" *ngIf="modalCropImg.hasData()">
+      <div class="modal-crop-img">
+          <angular-cropper #angularCropper [cropperOptions]="configCrop" [imageUrl]="modalCropImg.getData().imageForCrop"></angular-cropper>
+      </div>
+    <button  class="btn-inverse modal-crop-btn" (click)="sendRequestWithUpdateSizeCrop(); modalCropImg.close()">Apply</button>
+  </div>
+</ngx-smart-modal>

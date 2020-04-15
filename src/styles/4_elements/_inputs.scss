@@ -1,0 +1,120 @@
+input,
+textarea{
+  display: inline-block;
+  width: 100%;
+  outline: 0;
+  -webkit-appearance: none;
+  vertical-align: middle;
+  font-family: $base-font;
+  font-weight: 400;
+  font-size: 14px;
+  color: $c-base;
+  border: $border;
+  padding: 14px 20px;
+  transition: border-color 0.2s;
+  border-radius: 2px;
+  background: $c-inverse;
+  &:focus{
+    background: $c-inverse;
+  }
+  &::-webkit-input-placeholder {
+    font-family: $base-font;
+    color: $c-txt;
+    background: $c-inverse;
+  }
+  &::-moz-placeholder{
+    font-family: $base-font;
+    color: $c-txt;
+    background: $c-inverse;
+  }/* Firefox 19+ */
+  &:-moz-placeholder{
+    font-family: $base-font;
+    color: $c-txt;
+    background: $c-inverse;
+  }/* Firefox 18- */
+  &:-ms-input-placeholder{
+    font-family: $base-font;
+    color: $c-txt;
+    background: $c-inverse;
+  }
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+label{
+  display: block;
+  cursor: pointer;
+  color: $c-txt;
+  font-size: 16px;
+  font-family: $base-font;
+  font-weight: 600;
+  text-align: center;
+}
+.error-lbl{
+  color: $c-primary;
+  font-size: 12px;
+  padding: 5px 0 0;
+}
+.error{
+  border: 1px solid $c-error;
+}
+
+.has-error input{
+  border: 1px solid $c-error!important;
+}
+
+.form-status-hidden {
+  visibility: hidden;
+}
+.form-status{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+  color: $c-error;
+}
+.invalid-feedback{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 5px;
+  color: $c-error;
+}
+.wrap-inp{
+  flex-grow: 1;
+  margin-right: 10px;
+}
+.wrap-sub{
+  flex-shrink: 0;
+}
+.btn-sub{
+  outline: 0;
+  display: block;
+  padding: 12px 10px;
+  font-size: 16px;
+  font-family: $base-font;
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid $c-base;
+  background: $c-primary;
+  &:hover,
+  &:focus,
+  &:active{
+    outline: 0;
+    cursor: pointer;
+    background: $c-primary-h;
+  }
+}
+textarea{
+  resize: none;
+  border-color: $c-border-inverse;
+}
+input[readonly]{
+  cursor: not-allowed;
+}

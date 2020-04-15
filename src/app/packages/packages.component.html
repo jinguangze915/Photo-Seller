@@ -1,0 +1,140 @@
+<div *ngIf="!priceList.packages && !priceList.products" class="loaderWrapper"><div class="loader"></div></div>
+
+<div class="packages">
+
+    <app-nav></app-nav>
+
+    <div class="packages-cnt"  [ngClass]="withoutPackagesInCart ? '__without-packages' : ''">
+
+        <div class="packages-i" *ngIf="!withoutPackagesInCart && deadlineFlage > 0">
+            <div class="container">
+                <h2 class="packages-cnt-ttl ttl brown __small">Add-ons</h2>
+                <span class="packages-cnt-note" *ngIf="withoutPackagesInCart">Need to view another photo gallery?</span>
+                <div class="packages-row prod-row __S" [ngClass]="withoutPackagesInCart ? '__disable' : ''">
+                    <div class="packages-col __S prod-col-S" *ngFor="let product of priceList?.products | orderBy : {property: 'price', sort: 'asc'}">
+                        <div class="packages-col-cnt">
+                            <div class="packages-small-card">
+                                <div class="packages-small-cnt">
+                                    <div class="packages-small-wrap-img" *ngIf="product.image">
+                                      <img src="{{product.image}}" alt="" class="packages-small-img">
+                                    </div>
+                                    <div class="packages-small-l" [ngClass]="product.image ? '': '__text-left'">
+                                        {{product?.name}}
+                                    </div>
+                                    <div class="packages-card-price">
+                                      <div class="packages-card-total">${{product?.price}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="packages-card-b">
+                                <button class="btn-primary packages-card-btn" (click)="addToCart(product)">Choose</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="packages-i __packages">
+          <div class="container" *ngIf="!withoutPackagesInCart" [ngClass]="withoutPackagesInCart ? '__without-packages' : ''" id="wrap-togallery" style="text-align: center;">
+            <h2 class="packages-cnt-ttl ttl brown __small">Have another gallery code?</h2>
+            <div [ngClass]="withoutPackagesInCart ? '__disable' : ''">
+              <form [formGroup]="formCode" (ngSubmit)="onSubmitEmail()" class="order-promo-form" style="float:left;">
+                <div [ngClass]="{'has-error': formCode.get('code').invalid && formCode.get('code').touched }" class="order-wrap-inp" style="float:left;">
+                  <label for="code" class="order-lbl"></label>
+                  <input type="text" name="code" id="code" class="order-inp" formControlName="code"
+                    style="padding: 11px 20px;" placeholder="Enter Code here">
+                  <div *ngIf="submittedCode && ifEmailErrors.code.errors" class="invalid-feedback">
+                    <div *ngIf="ifEmailErrors.code.errors.required">Online Code is required</div>
+                  </div>
+                </div>
+                <div class="wrap-sub order-wrap-sub" style="float:left;">
+                  <button type="submit" class="btn btn-primary">Enter</button>
+                </div>
+                <div class="form-status" *ngIf="error">{{error}}</div>
+              </form>
+            </div>
+          </div>
+          
+          <div class="container" *ngIf="withoutPackagesInCart">
+            <div class="packages-row prod-row">
+              <div class="packages-col prod-col" *ngFor="let package of priceList?.packages | orderBy: {property: 'price', sort: 'asc'}">
+                <div class="packages-col-cnt" *ngIf="package.products">
+                  <div class="packages-card">
+                    <div class="packages-card-ttl brown __mobile">{{package?.name}}</div>
+                    <div class="packages-card-img" [ngStyle]="{'background-image': 'url(' + package.image + ')'}"></div>
+                    <div class="packages-card-cnt">
+                      <div class="packages-card-t">
+                        <div class="packages-card-ttl brown __desktop">{{package?.name}}</div>
+                        <div class="packages-card-m">
+                          <div class="packages-card-txt">
+                            <span *ngIf="package.limit_poses > 0">{{package.limit_poses}} - Pose Selection</span><br>
+                            <div class="default-cnt" [innerHTML] = "package?.description"></div>
+                          </div>
+                          <div class="packages-card-price">
+                            <div class="packages-card-total">${{package?.price}}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <a href="javascript:void(0)" class="packages-card-more" (click)="openModalDescription(package)">more details</a>
+                    </div>
+                  </div>
+                  <div class="packages-card-b">
+                    <button (click)="addToCart(package)" class="btn-primary packages-card-btn">Choose</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <div class="container">
+      <div class="btn-wrap-inline">
+        <a [routerLink]="['/app/'+ userId + '/gallery']" class="btn btn-gray"><i class="btn-gray-ic"></i> Back to gallery</a>
+        <a [routerLink]="['/app/'+ userId + '/order-placing']" *ngIf="!withoutPackagesInCart"
+           class="btn btn-success">
+          <i class="btn-success-ic visible-inline-md"></i>Proceed to checkout<i class="btn-success-ic hidden-inline-md"></i>
+        </a>
+      </div>
+    </div>
+</div>
+
+<!--Modal description product or package-->
+<ngx-smart-modal #modalDescription identifier="modalDescription">
+    <div class="modal-cnt" *ngIf="modalDescription.hasData()">
+        <div class="packages-col-modal prod-col">
+            <div class="packages-col-cnt">
+                <div [ngClass]="modalDescription.getData().products ? 'packages-card' : 'packages-small-card'">
+                    <div class="packages-card-ttl brown __mobile">{{ modalDescription.getData().name }}</div>
+                    <div class="packages-card-img" *ngIf ="modalDescription.getData().image" [ngStyle]="{'background-image': 'url(' + modalDescription.getData().image + ')'}"></div>
+                    <div class="packages-card-cnt">
+                        <div class="packages-card-t">
+                            <div class="packages-card-ttl brown __desktop">{{ modalDescription.getData().name }}</div>
+                            <div class="packages-card-m">
+                                <div class="packages-card-txt">
+                                    <p *ngIf ="modalDescription.getData().limit_poses">{{ modalDescription.getData().limit_poses }} - Pose Selection</p>
+                                    <div class="default-cnt" [innerHTML] = "modalDescription.getData().description"></div>
+                                </div>
+                                <div class="packages-card-price">
+                                    <div class="packages-card-total">${{ modalDescription.getData().price }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="packages-card-b">
+                    <button (click)="addToCart(modalDescription.getData())" class="btn-primary packages-card-btn">Choose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-b __packages">
+        <p class="ttl __M">How it works</p>
+        <ol class="modal-list">
+            <li class="modal-list-i">You choose one of the packages</li>
+            <li class="modal-list-i">You choose the photos you want to print/download based on the package terms</li>
+            <li class="modal-list-i">Add-ons may only be selected after a package is selected</li>
+            <li class="modal-list-i">You can manage your cart and update the packages/add-ons configuration any time before the order is placed</li>
+        </ol>
+    </div>
+</ngx-smart-modal>

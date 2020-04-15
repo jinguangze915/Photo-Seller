@@ -1,0 +1,70 @@
+@import "../styles/variables";
+
+.header{
+  &-t{
+    padding-bottom: 5px;
+    &-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &-cart{
+    &-cnt{
+      margin-left: 15px;
+    }
+    &-lnk{
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 5px 0;
+      line-height: 1.1;
+      font-size: 14px;
+      margin: 0;
+      text-transform: uppercase;
+      &:hover{
+        color:  darken($c-primary-h, 30%);
+      }
+      &:before{
+        content: '';
+        display: block;
+        background-image: url('/../img/icon-cart.png');
+        width: 46px;
+        height: 42px;
+      }
+    }
+    &-total{
+      font-size: 19px;
+      font-weight: 600;
+    }
+  }
+  &-logo{
+    max-width: 290px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .header{
+    &-t{
+      padding: 15px 0;
+      &-container{
+        align-items: flex-start;
+      }
+    }
+    &-logo {
+      max-width: 150px;
+    }
+    &-cart{
+      &-cnt{
+        margin-left: 10px;
+      }
+      &-lnk{
+        padding: 0 15px;
+        &:before{
+          width: 35px;
+          height: 31px;
+          background-size: cover;
+        }
+      }
+    }
+  }
+}

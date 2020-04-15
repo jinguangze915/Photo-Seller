@@ -1,0 +1,53 @@
+<div class="order-wrap" *ngIf="product?.product_type == 'Digital Single'; else elseProduct">
+  <div class="order-preview">
+    <div class="order-price-tbl-row-i order-preview-ttl brown u-Flex-grow-3">{{product?.name}}</div>
+    <div class="order-price-tbl-row-i order-preview-cnt u-Flex-grow-9 mg-center">
+      <div class="order-preview-img">
+        <img class="order-preview-change" src="{{product.image}}" (click)="changeImage($event, product)">
+      </div>
+    </div>
+  </div>
+  <div class="order-preview">
+    <div class="order-price-tbl-row-i order-preview-ttl brown u-Flex-grow-3"></div>
+    <div class="order-price-tbl-row-i order-preview-cnt u-Flex-grow-9 mg-center">
+      <div>
+        <button type="button" class="btn-change" (click)="changeImage($event, product)">Change Pose</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #elseProduct>
+  <div class="product-card">
+      <div class="product-card-wrap-img">
+
+          <img src="{{product.image}}" alt="" class="product-card-img">
+          <div class="product-card-img-crop-zone" *ngIf = "product.size"
+               [ngStyle]="{'top': dataCrop.top, 'height': dataCrop.height}"></div>
+      </div>
+
+      <div class="product-card-option">
+        {{product.name}}
+        <div *ngIf="product.size">
+          <span class="product-card-lbl" *ngIf="product.sizes.length > 1">Photo size:</span>
+
+          <ng-select [items]="product.sizes" *ngIf="product.sizes.length > 1"
+                     [(ngModel)]="product.size.name"
+                     bindLabel="name"
+                     [clearable] = "false"
+                     [searchable]="false"
+                     (change)="updateSize($event)"
+                     [isOpen]="product.size.myOpenVar">
+                     <ng-template ng-option-tmp let-item="item">
+                       <span [title]="item.name" class="ng-option-label">{{item.name}}</span>
+                     </ng-template>
+          </ng-select>
+        </div>
+      </div>
+
+    <div class="product-card-b">
+      <a (click)="changeImage($event, product)" class="btn-change product-card-btn">Change pose</a>
+  <!--    <a (click)="showModalCrop($event, product)" class="btn-crop product-card-btn" *ngIf="product.size">Crop</a>-->
+    </div>
+  </div>
+</ng-template>

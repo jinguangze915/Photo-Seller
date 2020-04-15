@@ -1,0 +1,220 @@
+button{
+  outline: none;
+  cursor: pointer;
+  font-family: $base-font;
+  color: $c-base;
+  line-height: 1;
+}
+.btn-wrap-inline{
+  display: flex;
+  justify-content: space-between;
+  margin: 30px -10px;
+  .btn{
+    display: inline-block;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+}
+.btn-gray{
+  display: block;
+  padding: 0 10px;
+  height: 44px;
+  line-height: 44px;
+  background: $c-border;
+  text-align: center;
+  font-size: 24px;
+  font-family: $ttl-font;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: all .3s;
+  cursor: pointer;
+  color: $c-inverse;
+  border-radius: 4px;
+  max-width: 200px;
+  width: 100%;
+  &:hover{
+    background: $c-border;
+    text-decoration: none;
+  }
+  &-ic{
+    display: inline-block;
+    background-image: url('/../img/arrow-back.png');
+    width: 31px;
+    height: 17px;
+    margin-right: 15px;
+  }
+}
+.btn-primary{
+  display: block;
+  background: $c-primary;
+  font-size: 24px;
+  font-family: $ttl-font;
+  font-weight: 600;
+  transition: background .3s;
+  color: $c-inverse;
+  border-radius: 4px;
+  padding: 0 20px;
+  height: 44px;
+  line-height: 44px;
+  &:hover{
+    background: $c-primary-h;
+  }
+  &[disabled]{
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    &:hover{
+      background: $c-primary-h;
+    }
+  }
+  &.disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  &-ic{
+    display: inline-block;
+    background-image: url('/../img/arrow-back-red.png');
+    width: 31px;
+    height: 17px;
+    margin-left: 15px;
+  }
+}
+
+.btn-success{
+  display: block;
+  background: $c-success;
+  font-size: 24px;
+  font-family: $ttl-font;
+  font-weight: 600;
+  transition: background .3s;
+  color: $c-inverse;
+  border-radius: 4px;
+  padding: 0 20px;
+  height: 44px;
+  line-height: 44px;
+  &:hover{
+    background: $c-success;
+  }
+  &[disabled]{
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    &:hover{
+      background: $c-success;
+    }
+  }
+  &.disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  &-ic{
+    display: inline-block;
+    background-image: url('/../img/arrow-back-white.png');
+    width: 31px;
+    height: 17px;
+    margin-left: 15px;
+  }
+}
+
+.btn-more{
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  border: none;
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 5px;
+  &:hover{
+    text-decoration: none;
+  }
+}
+.btn{
+  border: none;
+  &-change{
+    display: inline-block;
+    background: $c-ttl;
+    color: $c-inverse;
+    font-size: 24px;
+    font-family: $ttl-font;
+    font-weight: 600;
+    padding: 10px 5px;
+    text-align: center;
+    max-width: 120px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+  &-crop{
+    @extend .btn-change;
+    background: $c-orange;
+    max-width: 50px;
+    margin-left: 5px;
+  }
+  &-inverse{
+    @extend .btn-change;
+    background: $c-orange;
+  }
+}
+@media screen and (max-width: 1024px){
+  .btn-wrap-inline {
+    margin: 0;
+    .btn{
+      height: auto;
+      line-height: 1;
+      padding: 10px 20px;
+      text-align: center;
+      &-gray{
+        max-width: auto;
+        width: auto;
+      }
+      &-gray-ic{
+        display: block;
+        margin: 0 auto 5px;
+      }
+      &-primary-ic,
+      &-success-ic{
+        display: block;
+        margin: 0 auto 5px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 680px){
+  .btn-wrap-inline{
+    margin: 0;
+    .btn{
+      max-width: 140px;
+      &:first-of-type{
+        margin-left: 0;
+      }
+      &:last-of-type{
+        margin-right: 0;
+      }
+    }
+  }
+  .btn-wrap-blk{
+    width: 100%;
+    max-width: 350px;
+    margin: 35px auto 0;
+    .btn{
+      height: auto;
+      line-height: 1;
+      padding: 10px 20px;
+      text-align: center;
+    }
+  }
+  .btn{
+    &-change{
+      max-width: 120px;
+    }
+    &-crop{
+      max-width: 50px;
+    }
+  }
+}

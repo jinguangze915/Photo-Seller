@@ -1,0 +1,39 @@
+<nav class="menu">
+  <div class="container">
+    <ul class="menu-lst">
+      <li class="menu-i" [routerLink]="['/app/'+ userIdSubGallery + '/packages']" routerLinkActive="__active">
+        <a [routerLink]="['/app/'+ userIdSubGallery + '/packages']" class="menu-i-lnk __step-first" routerLinkActive="__active">
+          <span class="menu-i-ic">
+            <span *ngIf="!withoutPackagesInCart" class="menu-i-number">3</span>
+            <span *ngIf="withoutPackagesInCart" class="menu-i-number">1</span>
+          </span>
+          <span class="menu-i-txt">
+            <span *ngIf="!withoutPackagesInCart">Select addon or additional package</span>
+            <span *ngIf="withoutPackagesInCart">Select package</span>
+          </span>
+        </a>
+      </li>
+      <li class="menu-i" [routerLink]="['/app/'+ userIdSubGallery + '/cart']" routerLinkActive="__active">
+        <a [routerLink]="['/app/'+ userIdSubGallery + '/cart']" class="menu-i-lnk __step-second" routerLinkActive="__active">
+          <span class="menu-i-ic">
+            <span *ngIf="productType != ''" class="menu-i-number">4</span>
+            <span *ngIf="productType == ''" class="menu-i-number">2</span>
+          </span>
+          <span class="menu-i-txt">
+            <span *ngIf="productType != ''">Configure selected addon or additional package</span>
+            <span *ngIf="productType == ''">Configure package</span>
+          </span>
+        </a>
+      </li>
+      <li class="menu-i" [ngClass]="cartTotal <= 0 ? '__disabled' : ''" [routerLink]="['/app/'+ userIdSubGallery+ '/order-placing']" routerLinkActive="__active">
+        <a [routerLink]="['/app/'+ userIdSubGallery+ '/order-placing']" class="menu-i-lnk __step-third" routerLinkActive="__active">
+          <span class="menu-i-ic">
+            <span *ngIf="!withoutPackagesInCart" class="menu-i-number">5</span>
+            <span *ngIf="withoutPackagesInCart" class="menu-i-number">3</span>
+          </span>
+          <span class="menu-i-txt">Final form with clients data</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,304 @@
+<div *ngIf="addLoader" class="loaderWrapper"><div class="loader"></div></div>
+
+<div class="order">
+  <app-nav></app-nav>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="order-placing">
+
+      <div class="order-placing-cnt">
+        <div class="container" style="position: relative">
+          <h1 class="order-placing-ttl ttl">Checkout <span class="order-placing-arrow"></span> Your information</h1>
+            <div class="order-placing-l">
+              <div class="order-placing-i">
+                <!--<div (mouseover)="changeText=true" (mouseout)="changeText=false">-->
+                  <!--class="disabled" [ngClass]="{'disabled': !invalidEmail.test(form.get('email').value) || form.get('email').invalid && form.get('email').touched}"-->
+                  <a (click)="openModalPromoCode()" class="btn btn-primary order-placing-btn">Redeem Coupon</a>
+                <!--</div>-->
+
+                <!--<div [hidden]="!changeText" class="order-cupone-message">
+                  Please, fill an e-mail field to use a coupon
+                </div>-->
+
+                <div class="order-placing-txt ttl __M">My order</div>
+                <div class="order-row">
+                  <div class="order-col">Items</div>
+                  <div class="order-points">........................................................................................................................................................................................................................................................................................................</div>
+                  <div class="order-col __count">{{cartItems}}</div>
+                </div>
+                <div class="order-row">
+                  <div *ngIf="userHaveGift && !userOverdueGift" class="green">FREE gift included</div>
+                  <a *ngIf="!userHaveGift && !userOverdueGift" href="#" class="red" (click)="openModalReviewForGift($event)">Take a FREE gift  - leave a review in Google</a>
+
+                  <!--<div *ngIf="userHaveGift && !userOverdueGift; else notHaveGift" class="green">
+                    FREE gift included
+                  </div>
+                  <ng-template #notHaveGift>
+                    <a href="#" class="red" (click)="openModalReviewForGift($event)">Take a FREE gift  - leave a review in Google</a>
+                  </ng-template>-->
+                </div>
+                <div class="order-row">
+                  <div class="order-col">Subtotal</div>
+                  <div class="order-points">........................................................................................................................................................................................................................................................................................................</div>
+                  <div class="order-col __count">${{cartTotal}}</div>
+                </div>
+                <div class="order-row" *ngIf="productTax != 0">
+                  <div class="order-col">Tax</div>
+                  <div class="order-points">........................................................................................................................................................................................................................................................................................................</div>
+                  <div class="order-col __count">${{cartTax}}</div>
+                </div>
+                <div class="order-row" *ngIf="showTotalCoupon">
+                  <div class="order-col">Discount <br>{{promoData?.name}}</div>
+                  <div class="order-points">........................................................................................................................................................................................................................................................................................................</div>
+                  <div class="order-col __count">(${{resultCount}})</div>
+                </div>
+                <div class="order-row __bold">
+                  <div class="order-col">Total</div>
+                  <div class="order-points">........................................................................................................................................................................................................................................................................................................</div>
+                  <div class="order-col __count">${{countTotal}}</div>
+                </div>
+              </div>
+              <div class="order-placing-i">
+                <div class="order-placing-txt ttl __M">Free pick up in school</div>
+                <div class="order-row">
+                  <div class="order-col order-placing-note">NOTE:</div>
+                </div>
+                <div class="order-placing-desc">
+                  1) Your order will be mailed directly to the school along with all the other orders that were placed before the due date.
+                </div>
+                <div class="order-placing-desc">
+                  2) Digital Packages will include a Class Photo print that will be shipped to the school.
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="bg-light-orange">
+          <div class="container order-placing-txt ttl __M">Billing Address</div>
+        </div>
+        <div class="order-placing-form">
+            <div class="order-placing-blk bg-light-orange">
+              <div class="container __p-r">
+                <div class="order-placing-row row">
+                  <div [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched }" class="order-wrap-inp col">
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           class="order-inp"
+                           autocomplete="given-name"
+                           formControlName="name"
+                           placeholder="First Name">
+                    <div *ngIf="submitted && ifErrors.name.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.name.errors.required">First Name is required</div>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'has-error': form.get('lastname').invalid && form.get('lastname').touched }" class="order-wrap-inp col">
+                    <input type="text"
+                           name="lastname"
+                           id="lastname"
+                           class="order-inp"
+                           autocomplete="family-name"
+                           formControlName="lastname"
+                           placeholder="Last Name">
+                    <div *ngIf="submitted && ifErrors.lastname.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.lastname.errors.required">Last Name is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-placing-row row">
+                  <div [ngClass]="{'has-error': form.get('address').invalid && form.get('address').touched }" class="order-wrap-inp col">
+                    <input type="text"
+                           name="address"
+                           id="address"
+                           class="order-inp"
+                           autocomplete="address-line1"
+                           formControlName="address"
+                           placeholder="Address">
+                    <div *ngIf="submitted && ifErrors.address.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.address.errors.required">Address is required</div>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'has-error': form.get('city').invalid && form.get('city').touched }" class="order-wrap-inp col">
+                    <input type="text"
+                           name="city"
+                           id="city"
+                           class="order-inp"
+                           autocomplete="address-level2"
+                           formControlName="city"
+                           placeholder="City">
+                    <div *ngIf="submitted && ifErrors.city.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.city.errors.required">City is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="order-placing-row row">
+                  <div [ngClass]="{'has-error': form.get('state').invalid && form.get('state').touched }" class="order-wrap-inp col __S">
+                    <ng-select [items]="states"
+                               bindLabel="state"
+                               bindValue="state"
+                               groupBy="country"
+                               name="state"
+                               formControlName="state"
+                               [addTag]="addCustomState"
+                               [(ngModel)]="selectedState"
+                               (change)="onChangeState($event.country)"
+                               placeholder="State">
+                    </ng-select>
+                    <div *ngIf="submitted && ifErrors.state.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.state.errors.required">State is required</div>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'has-error': form.get('postalcode').invalid && form.get('postalcode').touched }" class="order-wrap-inp col __S">
+                    <input type="number"
+                           min="0"
+                           max="9"
+                           name="postalcode"
+                           id="postalcode"
+                           class="order-inp"
+                           autocomplete="postal-code"
+                           formControlName="postalcode"
+                           placeholder="Postal Code">
+                    <div *ngIf="submitted && ifErrors.postalcode.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.postalcode.errors.required">Postal Code is required</div>
+                    </div>
+                  </div>
+                  <div [ngClass]="{'has-error': form.get('country').invalid && form.get('country').touched }" class="order-wrap-inp col __S">
+                    <!--<ng-select [items]="countries"
+                               bindLabel="country"
+                               bindValue="country"
+                               name="country"
+                               formControlName="country"
+                               [addTag]="addCustomState"
+                               [(ngModel)]="selectedCountry">
+                    </ng-select>-->
+                    <input type="text"
+                           name="country"
+                           id="country"
+                           class="order-inp"
+                           autocomplete="postal-code"
+                           formControlName="country"
+                           readonly="readonly"
+                           placeholder="Country"
+                           [(ngModel)]="selectedCountry">
+                    <div *ngIf="submitted && ifErrors.country.errors" class="invalid-feedback">
+                      <div *ngIf="ifErrors.country.errors.required">Country is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container order-placing-blk __p-r">
+              <div class="order-placing-txt ttl __M">Contact</div>
+              <div class="order-placing-row row">
+                <div [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched }" class="order-wrap-inp col">
+                  <input type="email"
+                         name="email"
+                         id="email"
+                         class="order-inp"
+                         autocomplete="email"
+                         formControlName="email"
+                         placeholder="Email Address">
+                  <div *ngIf="submitted && ifErrors.email.errors" class="invalid-feedback">
+                    <div *ngIf="ifErrors.email.errors.required">Email Address is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="order-placing-blk bg-light-green">
+              <div class="container __p-r">
+                <div class="order-placing-txt ttl __M">Comment</div>
+                <div class="order-wrap-inp">
+                  <textarea name="comment" style="text-transform: none"
+                            id="comment"
+                            cols="30"
+                            rows="1"
+                            class="order-txt"
+                            formControlName="comment"
+                            placeholder="Your comment">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+
+          <div class="container">
+            <div class="order-placing-b">
+              <div class="order-wrap-checkbox">
+                <input class="form-checkbox"
+                       type="checkbox"
+                       name="promotion"
+                       id="promotion"
+                       formControlName="promotion">
+                <label for="promotion"><i class="checked-ic"></i><span>Receive promotions by email</span></label>
+              </div>
+              <div [ngClass]="{'has-error': submitted && ifErrors.agree.errors }" class="order-wrap-checkbox">
+                <input class="form-checkbox"
+                       type="checkbox"
+                       name="agree"
+                       id="agree"
+                       formControlName="agree">
+                <label for="agree"><i class="checked-ic"></i><a href="" class="order-lbl-lnk" target="_blank">I agree to the terms & conditions</a></label>
+              </div>
+            </div>
+
+            <div class="form-status" *ngIf="error">{{error}}</div>
+
+            <div class="wrap-sub order-wrap-sub">
+              <button type="submit"
+                      class="btn btn-primary">
+                      <span *ngIf="countTotal > 0">Make a payment</span>
+                      <span *ngIf="countTotal == 0">Place the order</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+
+
+<!--Modal promo-code-->
+<ngx-smart-modal #modalPromoCode identifier="modalPromoCode">
+  <div class="order-modal-cnt">
+    <h1 class="ttl __M">Coupon Code</h1>
+    <p class="order-modal-desc">If you have a coupon code, enter that code below.</p>
+    <form [formGroup]="formPromo" (ngSubmit)="onSubmitPromo()" class="order-promo-form">
+      <div [ngClass]="{'has-error': formPromo.get('promo_code').invalid && formPromo.get('promo_code').touched }" class="order-wrap-inp">
+        <label for="promo_code" class="order-lbl"></label>
+        <input type="text"
+               name="promo_code"
+               id="promo_code"
+               class="order-inp"
+               (blur)="noClosePopup($event)"
+               formControlName="promo_code">
+        <div *ngIf="submittedPromo && ifPromoErrors.promo_code.errors" class="invalid-feedback">
+          <div *ngIf="ifPromoErrors.promo_code.errors.required">Coupon Code is required</div>
+        </div>
+      </div>
+
+      <div class="wrap-sub order-wrap-sub">
+        <button type="submit"
+                class="btn btn-primary">Redeem coupon</button>
+      </div>
+      <div class="form-status" *ngIf="error">{{error}}</div>
+    </form>
+  </div>
+</ngx-smart-modal>
+
+
+<!--Modal with review for gift-->
+<ngx-smart-modal #modalReview identifier="modalReview"  class="order-modal-cnt" (onClose)="afterCloseModal()">
+    <div class="ttl">Exclusive free gift for our online fans</div>
+
+    <!-- <p class="ttl __S">
+        Leave a review on Google with the same e-mail address that  you check out with and receive a FREE portrait calendar
+    </p> -->
+    <a href="https://search.google.com/local/writereview?placeid=ChIJjdBqOS9u3IAR1QprQRqkhus"
+       target="_blank"
+       class="modal-review-btn"
+       (click)="leaveReview()">
+        <img src="/img/google-review.png" alt="review">
+    </a>
+
+    <a class="order-lbl-lnk" (click)="modalReview.close()"> I don't want a free gift </a>
+
+</ngx-smart-modal>

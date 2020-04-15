@@ -1,0 +1,175 @@
+//Bootstarp grid
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import '../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../node_modules/bootstrap/scss/_grid.scss';
+
+*{
+  box-sizing: border-box;
+}
+html,
+body{
+  height: 100%;
+  line-height: 1;
+  font-family: $base-font;
+  color: $c-base;
+  font-weight: 400;
+  background: $c-inverse;
+}
+
+.container{
+  max-width: $width-container + ($padding-container * 2);
+  @include make-container(); /* align center, add default padding*/
+  padding-left: $padding-container;
+  padding-right: $padding-container;
+}
+
+.col{
+  @include make-col-ready();
+  @include make-col(4);
+  &.__M{
+    @include make-col(3);
+  }
+  &.__L {
+    @include make-col(12);
+  }
+}
+.row{
+  @include make-row();
+}
+
+.d-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.m-auto{
+  margin: 0 auto;
+}
+
+.prod-row{
+  @include make-row();
+  margin-left: -15px;
+  margin-right: -15px;
+  flex-wrap: wrap;
+}
+.prod-col{
+  @include make-col(6);
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+}
+.prod-col-S{
+  @include make-col(4);
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+}
+.prod-card{
+  border: $border;
+  padding: 20px;
+}
+
+.__desktop{
+  display: block;
+}
+.__mobile{
+  display: none;
+}
+
+.hidden-md{
+  display: flex!important;
+}
+.hidden-inline-md{
+  display: inline-block!important;
+}
+
+.hidden-inline-xs{
+  display: inline-block!important;
+}
+.visible-xs{
+  display: none!important;
+}
+.visible-md,
+.visible-inline-md{
+  display: none!important;
+}
+
+/* footer to bottom of page */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.cnt-wrap {
+  position: relative;
+  flex: 1 0 auto;
+}
+.footer {
+  flex: 0 0 auto;
+
+}
+/* end footer to bottom of page */
+@media screen and (max-width: 1024px){
+  .prod{
+    &-row{
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+    &-col{
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 20px;
+    }
+    &-card{
+      padding: 15px;
+    }
+  }
+  .hidden-md{
+    display: none!important;
+  }
+  .hidden-inline-md{
+    display: none!important;
+  }
+  .visible-md{
+    display: flex!important;
+  }
+  .visible-inline-md{
+    display: block!important;
+  }
+}
+@media screen and (max-width: 900px){
+  .container{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media screen and (max-width: 680px){
+  .prod{
+    &-row{
+      margin-left: 0;
+      margin-right: 0;
+    }
+    &-col{
+      @include make-col(12);
+      padding-left: 0;
+      padding-right: 0;
+    }
+    &-card{
+      padding: 10px;
+    }
+  }
+  .__desktop{
+    display: none;
+  }
+  .__mobile{
+    display: block;
+  }
+  .hidden-inline-xs{
+    display: none!important;
+  }
+  .visible-xs{
+    display: block!important;
+  }
+}

@@ -1,0 +1,36 @@
+@import "../styles/variables";
+.footer{
+  &-cnt{
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: $c-txt;
+    &-ttl{
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    &-txt{
+      display: block;
+      font-weight: 400;
+    }
+    &-b{
+      margin-top: 10px;
+    }
+    &-lnk{
+      display: inline-block;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 680px){
+  .footer {
+    &-cnt {
+      &-txt{
+        font-size: 14px;
+      }
+    }
+  }
+}

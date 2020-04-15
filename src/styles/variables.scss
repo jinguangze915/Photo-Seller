@@ -1,0 +1,69 @@
+// Bootstrap grid
+$enable-flex:               true;
+$enable-grid-classes:       false;
+$grid-gutter-width: 30px;
+
+
+//Base container
+$padding-container: 30px;
+$width-container:	1450px;
+
+
+// Base color
+$dark: #000;
+$c-ttl: #622a14;
+$c-orange: #ffaf1c;
+$c-base: #625550;
+$c-txt: #6e7870;
+$c-inverse: #fff;
+$c-btn: #4385e9;
+$c-mob: #a9a8a7;
+
+
+$c-primary: #ed3f27;
+$c-primary-h: #ED3F27;
+$c-success: #3cc676;
+$c-desc: #2986CC;
+$c-desc-h: #33A7FF;
+$c-border: #6e7870;
+$c-border-inverse: #ffefd2;
+$c-bg: #eef9ef;
+$c-fond: #fdf4f4;
+
+$c-error: #CF1919;
+$c-error-h: #AF0909;
+
+// Variables
+$gradient: linear-gradient($c-error, $c-error-h);
+$border: 1px solid $c-border;
+
+.green {
+  color: $c-success;
+}
+.orange{
+  color: $c-orange;
+}
+.brown{
+  color: $c-ttl;
+}
+.gray{
+  color: $c-txt;
+}
+.blue{
+  color: $c-btn;
+}
+.red{
+  color: $c-primary;
+}
+.bold{
+  font-weight: 600;
+}
+.bg-light-orange{
+  background: $c-border-inverse;
+}
+.bg-light-green{
+  background: $c-bg;
+}
+.bg-white{
+  background: $c-inverse;
+}

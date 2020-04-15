@@ -1,0 +1,133 @@
+@import "../styles/variables";
+@import "../styles/1_configs/configs";
+@import "../styles/5_blocks/grid";
+@import "../categories/categories.component";
+@import "../order-placing/order-placing.component";
+
+.category{
+  &-cnt{
+    margin-bottom: 60px;
+    &-ttl{
+      padding: 15px 0 0;
+    }
+    &-subttl{
+      font-size: 30px;
+    }
+    &-txt{
+      font-size: 16px;
+      color: $c-txt;
+      padding-bottom: 20px;
+    }
+  }
+  &-row{
+    @include make-row();
+    margin-left: -10px;
+    margin-right: -10px;
+    flex-wrap: wrap;
+  }
+  &-col{
+    @include make-col(2.4);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 40px;
+  }
+  &-card{
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    z-index: 0;
+    &:hover{
+      cursor: pointer;
+      &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($dark,.25);
+      }
+    }
+    &-lnk{
+      display: block;
+      padding-bottom: 300px;
+    }
+  }
+  &-caption{
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    &-ic{
+      margin: 0 auto 6px;
+      background-image: url('/../img/cart.png');
+    }
+    &-txt{
+      color: $c-txt;
+      font-size: 14px;
+    }
+  }
+}
+.categories {
+  &-b {
+    max-width: 125px;
+  }
+}
+
+:host ::ng-deep {
+  .modal-email{
+    .nsm-dialog-btn-close{
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .category {
+    &-col {
+      @include make-col(3);
+    }
+  }
+}
+@media screen and (max-width: 800px){
+  .category {
+    &-col {
+      @include make-col(4);
+    }
+  }
+}
+@media screen and (max-width: 680px){
+  .category{
+    margin-bottom: 20px;
+    padding-top: 5px;
+    &-cnt{
+      margin-bottom: 30px;
+      &-ttl{
+        margin-bottom: 0;
+      }
+      &-subttl{
+        padding-top: 10px;
+      }
+    }
+    &-row {
+      @include make-row();
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+    &-col {
+      @include make-col(6);
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-bottom: 40px;
+    }
+  }
+}
+@media screen and (max-width: 480px){
+  .category{
+    &-col {
+      @include make-col(12);
+      max-width: 220px;
+      margin: 0 auto 40px;
+    }
+  }
+}

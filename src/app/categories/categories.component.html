@@ -1,0 +1,27 @@
+<div *ngIf="!gallery.data" class="loaderWrapper"><div class="loader"></div></div>
+
+<div class="category categories">
+  <div class="category-container">
+    <div class="category-cnt container">
+      <div class="categories-row">
+        <!-- ONE COL -->
+        <div class="categories-col" *ngFor="let item of gallery?.data">
+          <div class="categories-card">
+            <a [routerLink]="['/app/' + item?.sub_gallery_pass + '/gallery/']" class="categories-card-lnk" [ngStyle]="{'background-image': 'url(' + item?.preview + ')'}">
+              <div class="categories-b">
+                <div class="categories-b-cnt">
+                  <div class="categories-b-ttl">{{item?.name}}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!-- END ONE COL -->
+      </div>
+    </div>
+    <div class="categories-b-img">
+      <img src="/img/children.png" alt="children">
+    </div>
+  </div>
+  <div class="btn-up" (click)="scrollToTop()"></div>
+</div>

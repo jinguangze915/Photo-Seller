@@ -1,0 +1,33 @@
+.loaderWrapper{
+  background: rgba(#fff, .6);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 9999;
+  //opacity: .60;
+}
+
+.loader, .loader:after {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.loader {
+  margin: 200px auto;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  text-indent: -9999em;
+  background-image: url("/../img/loading.gif");
+}
+@keyframes mymove {
+
+  100% {transform: rotate(360deg)}
+}
+
+@-webkit-keyframes mymove {
+  100% {transform: rotate(360deg)}
+}

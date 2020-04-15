@@ -1,0 +1,147 @@
+@import "../styles/1_configs/configs";
+@import "../styles/5_blocks/grid";
+@import "../styles/variables";
+
+.categories{
+  background: $c-fond;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  .category-cnt-txt{
+    padding-bottom: 20px;
+    font-size: 12px;
+    color: $c-txt;
+    text-transform: uppercase;
+  }
+  &-row{
+    @include make-row();
+    margin-left: -10px;
+    margin-right: -10px;
+    flex-wrap: wrap;
+  }
+  &-col{
+    @include make-col(2.4);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 40px;
+  }
+  &-card{
+    position: relative;
+    &-lnk{
+      display: block;
+      padding-bottom: 280px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+    }
+    /*&:hover{
+      cursor: pointer;
+      &:after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($dark,.25);
+      }
+      //box-shadow: 1px 1px 25px 0 rgba($c-primary,.25);
+    }*/
+  }
+  &-b{
+    position: absolute;
+    right: 0;
+    bottom: -23px;
+    left: 0;
+    background-color: $c-primary;
+    max-width: 200px;
+    margin: 0 auto;
+    border-radius: 4px;
+    transition: all .3s;
+    z-index: 1;
+    &-ttl{
+      display: block;
+      padding: 10px;
+      width: 100%;
+      font-size: 26px;
+      font-weight: 600;
+      font-family: $ttl-font;
+      color: $c-inverse;
+      text-align: center;
+    }
+    &:hover{
+      background: $c-primary-h;
+    }
+  }
+}
+
+.btn-up{
+  display: block;
+  position: fixed;
+  max-width: 80px;
+  width: 100%;
+  height: 80px;
+  cursor: pointer;
+  background-image: url('/../img/upscroll.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  right: 10px;
+  bottom: 25px;
+  z-index: 99;
+}
+
+@media screen and (max-width: 1024px){
+  .categories {
+    &-col {
+      @include make-col(4);
+    }
+  }
+}
+
+@media screen and (max-width: 750px){
+  .btn-up{
+    right: 5px;
+    bottom: 10px;
+  }
+}
+@media screen and (max-width: 680px){
+  .categories {
+    &-row {
+      @include make-row();
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+    &-col {
+      @include make-col(6);
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-bottom: 40px;
+    }
+    &-card{
+      &-lnk{
+        &:hover{
+          box-shadow: none;
+        }
+      }
+    }
+    .category-cnt-txt{
+      margin-bottom: 0;
+    }
+    &-b{
+      &-img{
+        display: none;
+      }
+    }
+  }
+  .btn-up{
+    right: 0;
+  }
+}
+@media screen and (max-width: 480px){
+  .categories {
+    &-col {
+      @include make-col(12);
+      max-width: 220px;
+      margin: 0 auto 40px;
+    }
+  }
+}

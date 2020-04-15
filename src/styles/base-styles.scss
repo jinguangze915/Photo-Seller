@@ -1,0 +1,29 @@
+// Config
+@import "1_configs/configs";
+
+// Core
+@import "2_core/core";
+
+// Common
+@import "4_elements/elements";
+
+@import "5_blocks/blocks";
+
+.d-n{
+  display: none;
+}
+.d-b{
+  display: block;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+}

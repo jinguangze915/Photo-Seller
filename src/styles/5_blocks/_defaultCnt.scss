@@ -1,0 +1,53 @@
+.default-cnt{
+  ul{
+    margin: 10px 0;
+  }
+  li{
+    margin-bottom: 5px;
+  }
+
+  h1,h2{
+    @extend .ttl-l;
+  }
+  h3,h4,h5{
+    @extend .ttl
+  }
+  p{
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  table{
+    margin: 10px 0;
+    max-width: 100%;
+    width: auto !important;
+  }
+  td {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 10px 5px;
+    vertical-align: middle;
+  }
+  img {
+    max-width: 100%;
+  }
+  strong,
+  b{
+    font-weight: bold;
+  }
+  i{
+    font-style: italic;
+  }
+  a{
+    color: inherit;
+    &:hover{
+      text-decoration: underline;
+    }
+    &:focus{
+      outline: none;
+    }
+
+  }
+}

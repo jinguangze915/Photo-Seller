@@ -1,0 +1,26 @@
+.ttl{
+  font-size: 60px;
+  font-family: $ttl-font;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 15px;
+  color: $c-txt;
+  text-transform: uppercase;
+  &.__M{
+    font-size: 36px;
+    text-transform: none;
+    color: $c-ttl;
+  }
+  &.__S{
+    font-size: 18px;
+  }
+  &-l{
+    font-size: 36px;
+    padding: 20px 0;
+  }
+}
+@media screen and (max-width: 680px){
+  .ttl{
+    font-size: 40px;
+  }
+}
